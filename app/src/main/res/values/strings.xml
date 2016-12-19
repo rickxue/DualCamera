@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RecorderDemo</string>
+    <string name="button_open_camera">open camera 1</string>
+    <string name="button_open_camera2">open camera 2</string>
+    <string name="button_close_camera">close camera 1</string>
+    <string name="button_close_camera2">close camera 2</string>
+    <string name="button_start_recording">start recording</string>
+    <string name="button_stop_recording">stop recording</string>
+    <string name="button_capture">Capture</string>
+
+    <string name="camera_error_title">Camera error</string>
+    <string name="error_permissions">The app does not have critical permissions needed to run. Please check your permissions settings.</string>
+
+    <string name="picture_file_name_format" translatable="false">"'PIC'_yyyyMMdd_HHmmss"</string>
+</resources>

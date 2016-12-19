@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">相机测试应用</string>
+    <string name="button_open_camera">打开后摄</string>
+    <string name="button_open_camera2">打开前摄</string>
+    <string name="button_close_camera">关闭后摄</string>
+    <string name="button_close_camera2">关闭前摄</string>
+    <string name="button_start_recording">开始录像</string>
+    <string name="button_stop_recording">停止录像</string>
+    <string name="button_capture">拍照</string>
+
+    <string name="camera_error_title">"相机发生错误"</string>
+    <string name="error_permissions">"此应用缺少运行所需的必要权限。请检查您的权限设置。"</string>
+    <string name="dialog_dismiss">"关闭"</string>
+
+</resources>
