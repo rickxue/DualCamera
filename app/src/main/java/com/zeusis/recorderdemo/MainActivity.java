@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonClose2;
     private Button mButtonStartRecorder;
     private Button mButtonStopRecorder;
+    private Button mButtonStartRecorder2;
+    private Button mButtonStopRecorder2;
 
     private SurfaceTexture mSurfaceTexture;
     private SurfaceTexture mSurfaceTexture2;
@@ -256,8 +258,16 @@ public class MainActivity extends AppCompatActivity {
         mButtonClose2 = (Button)findViewById(R.id.close_camera2);
         mButtonClose2.setOnClickListener(mButtonClickListener);
 
-        mButtonStartRecorder = (Button)findViewById(R.id.start_recorder);
-        mButtonStopRecorder = (Button)findViewById(R.id.stop_recorder);
+        Button capture2 = (Button)findViewById(R.id.capture2);
+        capture2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePictureByCameraTwo();
+            }
+        });
+
+        mButtonStartRecorder2 = (Button)findViewById(R.id.start_recorder2);
+        mButtonStopRecorder2 = (Button)findViewById(R.id.stop_recorder2);
 
     }
 
@@ -417,12 +427,21 @@ public class MainActivity extends AppCompatActivity {
         mCamera.takePicture(mJpegPictureCallback, mRawPictureCallback, mJpegPictureCallback);
     }
 
+    private void takePictureByCameraTwo(){
+        if(mCamera2 == null) return;
+
+        Storage.generateStoragePath();
+        mPictureName = Storage.createPictureName(System.currentTimeMillis());
+
+        mCamera2.takePicture(mJpegPictureCallback, mRawPictureCallback, mJpegPictureCallback);
+    }
+
     private void startCameraTwoPreview(){
         if(mCamera2 == null){
             return;
         }
         //getDisplayRotation();
-        mCamera2.setDisplayOrientation(cameraInfos[firstFront].orientation);
+        mCamera2.setDisplayOrientation(cameraInfos[firstFront].orientation%180);
         try {
             mCamera2.setPreviewTexture(mSurfaceTexture2);
         } catch (IOException e) {

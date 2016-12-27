@@ -96,12 +96,17 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:id="@+id/capture2"
+                    android:text="@string/button_capture"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/start_recorder2"
                     android:text="@string/button_start_recording"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:id="@+id/stop_recorder2"
                     android:text="@string/button_stop_recording"/>
             </LinearLayout>
 
