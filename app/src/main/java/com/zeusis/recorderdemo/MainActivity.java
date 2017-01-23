@@ -24,6 +24,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zeusis.recorderdemo.platform.CameraFactory;
+import com.zeusis.recorderdemo.platform.CameraFeature;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -208,8 +211,12 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        setContentView(R.layout.activity_main);
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        if(CameraFeature.isSingleCameraLayout()){
+            setContentView(R.layout.activity_main_single);
+        }else {
+            setContentView(R.layout.activity_main);
+        }
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
@@ -298,6 +305,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+/*        firstBack = 0;
+        firstFront = 2;*/
         Log.i(TAG,"getCameraDeviceInfo  mCameraNumber:"+mCameraNumber+
                 ", firstBack:"+firstBack+", firstFront:"+firstFront);
     }
@@ -340,9 +349,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Camera openCamera(int id){
-        if(mSurfaceTexture2 == null || mSurfaceTexture == null){
-            Log.i(TAG,"mSurfaceTexture || mSurfaceTexture2 not prepared");
-            return null;
+        if(CameraFeature.isSingleCameraLayout()){
+            if (mSurfaceTexture == null) {
+                Log.i(TAG, "mSurfaceTexture not prepared");
+                return null;
+            }
+        }else {
+            if (mSurfaceTexture2 == null || mSurfaceTexture == null) {
+                Log.i(TAG, "mSurfaceTexture || mSurfaceTexture2 not prepared");
+                return null;
+            }
         }
         Camera camera;
         camera = Camera.open(id);
@@ -385,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<String> focusModes = param.getSupportedFocusModes();
         for(String focusMode :focusModes){
-            if(focusMode.contains("auto")){
+            if(focusMode.contains("continuous-picture")){
                 Log.i(TAG,"setFocusMode :"+focusMode);
                 param.setFocusMode(focusMode);
             }
@@ -416,6 +432,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG,"setPictureSize :" + pictureSize.width + "x" + pictureSize.height);
         param.setPictureSize(pictureSize.width, pictureSize.height);
         camera.setParameters(param);
+        CameraFactory.getPlatformCamera().setZSLMode(param, true);
     }
 
     private void takePictureByCameraOne(){
