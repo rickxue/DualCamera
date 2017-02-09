@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.WindowManager;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -43,4 +44,20 @@ public class CameraUtil {
         return sScreenHeight;
     }
 
+    public static boolean isPreviewRatioEquals(double ratio, int width, int height){
+        if(width == 0 || height == 0){
+            return false;
+        }
+        final double ASPECT_TOLERANCE = 0.001f;
+        double targetRatio = (double)height / (double)width;
+        double temp = Math.abs(ratio - targetRatio);
+        BigDecimal data1 = new BigDecimal(temp);
+        BigDecimal data2 = new BigDecimal(ASPECT_TOLERANCE);
+
+        if(data1.compareTo(data2) == -1){
+            return true;
+        }
+        return false;
+
+    }
 }

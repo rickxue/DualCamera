@@ -70,6 +70,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/stop_recorder"
                     android:text="@string/button_stop_recording"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/filter"
+                    android:text="@string/button_filter"/>
                 </LinearLayout>
             </LinearLayout>
 

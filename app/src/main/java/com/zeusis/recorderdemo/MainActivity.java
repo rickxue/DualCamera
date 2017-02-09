@@ -24,6 +24,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zeusis.recorderdemo.filter.IFilterRenderController;
+import com.zeusis.recorderdemo.filter.TextureViewManager;
 import com.zeusis.recorderdemo.platform.CameraFactory;
 import com.zeusis.recorderdemo.platform.CameraFeature;
 
@@ -82,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     public static final long LOW_STORAGE_THRESHOLD_BYTES = 50000000;
     public static final long MAX_STORAGE_THRESHOLD_BYTES = 2000000000;
 
+    private TextureViewManager mTextureViewManager;
+
     private final View.OnClickListener mButtonClickListener = new View.OnClickListener(){
 
         @Override
@@ -105,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
             Log.i(TAG, "mSurfaceListener onSurfaceTextureAvailable");
             mSurfaceTexture = surface;
+            mFilterRenderController.createTexture(surface,width,height);
+            mSurfaceTexture = mTextureViewManager.getPreviewTexture();
         }
 
         @Override
@@ -217,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             setContentView(R.layout.activity_main);
         }
-
+        initNewFilterManager(this,findViewById(R.id.activity_main));
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
@@ -773,6 +779,16 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG,"JpegPictureCallback $$ onShutter");
         }
     }
+
+    /**********************************************************************************************/
+    private IFilterRenderController mFilterRenderController = null;
+    public void setIFilterRenderController(IFilterRenderController filterRenderController) {
+        mFilterRenderController = filterRenderController;
+    }
+    private void initNewFilterManager(MainActivity activity, View frame) {
+        mTextureViewManager = new TextureViewManager(activity, frame);
+    }
+
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.

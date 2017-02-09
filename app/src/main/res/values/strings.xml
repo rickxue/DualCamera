@@ -12,4 +12,17 @@
     <string name="error_permissions">The app does not have critical permissions needed to run. Please check your permissions settings.</string>
 
     <string name="picture_file_name_format" translatable="false">"'PIC'_yyyyMMdd_HHmmss"</string>
+
+    <!-- effect filter names -->
+    <string name="button_filter">filter</string>
+    <string name="effect_filter_blackwhite">Mono</string>
+    <string name="effect_filter_nature">Nature</string>
+    <string name="effect_filter_aibao">Tonal</string>
+    <string name="effect_filter_warm">Warm</string>
+    <string name="effect_filter_normal">Normal</string>
+    <string name="effect_filter_boots">Chrome</string>
+    <string name="effect_filter_lomo">Lomo</string>
+    <string name="effect_filter_smallfresh">Cold</string>
+    <string name="effect_filter_gorgeous">Gorgeous</string>
+    <string name="mode_panel_item_qrcode">LeScan</string>
 </resources>
